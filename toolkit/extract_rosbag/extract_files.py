@@ -14,6 +14,18 @@ import shutil
 import scipy.io as sio
 import inspect
 
+## add gt_bag save to csv
+gt_bag = 'gt_8.bag'
+bag_dir = 'path/to/datasets/handheld/'
+bag = rosbag.Bag(gt_bag, 'r')
+topics = ['/aft_mapped_to_init']
+csv_file = open(os.path.join(bag_dir,'gt_bag_data.csv'), 'w')
+csv_writer = csv.writer(csv_file)
+csv_writer.writerow(['rosbagTimestamp', 'x', 'y', 'z', 'x.1', 'y.1', 'z.1', 'w'])
+for topic, msg, t in bag.read_messages(topics):
+    pose = msg.pose.pose
+    csv_writer.writerow([t, pose.position.x, pose.position.y, pose.position.z, pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w])
+csv_file.close()
 
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
@@ -26,8 +38,8 @@ with open(join(parentdir, 'config.yaml'), 'r') as f:
 
 # Select Platform
 # platform = 'dataset_creation_robot'  # UGV
-# platform = 'dataset_creation_handheld'
-platform = 'dataset_creation_drone'  # UAV
+platform = 'dataset_creation_handheld'
+# platform = 'dataset_creation_drone'  # UAV
 
 pendrive_dir = cfg[platform]['dataroot']
 save_dir = pendrive_dir

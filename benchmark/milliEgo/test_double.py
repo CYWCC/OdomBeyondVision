@@ -33,7 +33,6 @@ set_session(tf.Session(config=config))
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 os.sys.path.insert(0, os.path.dirname(currentdir))
 
-
 # keras
 
 K.set_image_dim_ordering('tf')
@@ -60,7 +59,7 @@ def main():
     IMU_LENGTH = (np.int(os.path.dirname(args.data_dir)[-1]) - 1) * 5
     if IMU_LENGTH < 10:
         IMU_LENGTH = 10
-    IMU_LENGTH = 25
+    IMU_LENGTH = 20
     print('IMU LENGTH is {}'.format(IMU_LENGTH))
     # Define and construct model
     print("Building network model ......")
@@ -84,8 +83,11 @@ def main():
             network_model = build_model_cross_fusion(join('./models', args.model, args.epoch),
                                                      imu_length=IMU_LENGTH, mask_att=nn_opt['cross_att_type'], istraining=False)
         else:
-            print(join('./models', args.model, args.epoch))
-            network_model = build_model_cross_att(join('./models', args.model, args.epoch),
+            # print(join('./models', args.model, args.epoch))
+            # network_model = build_model_cross_att(join('./models', args.model, args.epoch),
+            #                                       imu_length=IMU_LENGTH, mask_att=nn_opt['cross_att_type'], istraining=False)
+            print(join('./models', args.model, 'best'))
+            network_model = build_model_cross_att(join('./models', args.model, 'best'),
                                                   imu_length=IMU_LENGTH, mask_att=nn_opt['cross_att_type'], istraining=False)
     if 'dio' in args.model:
         network_model = build_model_plus_imu(join('./models', args.model, args.epoch), input_shape=(1, 480, 640, 3),

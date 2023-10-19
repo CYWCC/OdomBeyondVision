@@ -138,11 +138,13 @@ def main():
     # Load all sequences name and list of master-slaves
     parent_dir = dirname(dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))))
     with open(join(parent_dir, 'config.yaml'), 'r') as f:
-        cfg = yaml.load(f)
+        cfg = yaml.safe_load(f)
 
     all_exps = cfg['dataset_creation_handheld']['all_exp_files']
-    master = cfg['dataset_creation_handheld']['master']
-    slaves = cfg['dataset_creation_handheld']['slaves']
+    # master = cfg['dataset_creation_handheld']['master']
+    # slaves = cfg['dataset_creation_handheld']['slaves']
+    master = cfg['dataset_creation_handheld']['milliego']['master']
+    slaves = cfg['dataset_creation_handheld']['milliego']['slaves']
 
     # Prepare the path files to load dataset range and mean
     range_master_file = join(save_dir, str('dataset_range_' + master + '.txt'))

@@ -8,8 +8,9 @@ mvo:
     # multimodal_data_dir: '/workdir/Dataset/Ox-Ed-rosbags/milliego_h5_gap2'
     # multimodal_data_dir: '/workdir/Dataset/Ox-Ed-rosbags/milliego_handheld_gap5'
     # multimodal_data_dir: '/workdir/Dataset/Ox-Ed-rosbags/milliego_handheld_gap3'
-    multimodal_data_dir: '/workdir/Dataset/Ox-Ed-rosbags/milliego_drone_overlap_gap2'
+#    multimodal_data_dir: '/workdir/Dataset/Ox-Ed-rosbags/milliego_drone_overlap_gap2'
     # multimodal_data_dir: '/workdir/Dataset/Ox-Ed-rosbags/milliego_robot_gap5'
+    multimodal_data_dir: '/datasets/millego_handheld_gap4'
 eval:
     models:
         - cross-mio_turtle_v1
